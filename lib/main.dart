@@ -161,22 +161,28 @@ class _RegisterState extends State<Register>{
   void _register() async{
     if(_passwordController.text == _confirmPasswordController.text){
       // final User user = ( await _auth.createUserWithEmailAndPassword(email: _emailController.text, password: _passwordController.text)).user;
-      final User? user = (
-          await _auth.createUserWithEmailAndPassword(email: _emailController.text, password: _passwordController.text)
-      ).user;
+      try{
+        final User? user = (
+            await _auth.createUserWithEmailAndPassword(email: _emailController.text, password: _passwordController.text)
+        ).user;
 
-      if(user != null) {
-        setState(() {
-          _sucess = true;
-        });
-        Fluttertoast.showToast(
-            msg: "Berhasil!"
-        );
-        Navigator.pop(context);
-      } else {
-        setState(() {
-          _sucess = false;
-        });
+        if(user != null) {
+          setState(() {
+            _sucess = true;
+          });
+          Fluttertoast.showToast(
+              msg: "Berhasil!"
+          );
+          Navigator.pop(context);
+        } else {
+          setState(() {
+            _sucess = false;
+          });
+          Fluttertoast.showToast(
+              msg: "Gagal Register"
+          );
+        }
+      }on FirebaseAuthException catch (e) {
         Fluttertoast.showToast(
             msg: "Gagal Register"
         );
@@ -274,7 +280,10 @@ class _StateHome extends State<Home>{
   Repository repository = new Repository();
 
   getdata() async{
-    listperson = await repository.getData();
+    List<Person> test = await repository.getData();
+    setState(() {
+      listperson = test;
+    });
   }
 
   @override
@@ -285,7 +294,11 @@ class _StateHome extends State<Home>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new AppBar(title: new Text("Home")),
+      appBar: new AppBar(title: new Text("Home"), actions: <Widget>[
+        new IconButton(icon: Icon(Icons.autorenew), onPressed: () async {
+          getdata();
+        },)
+      ],),
       body: new ListView.separated(itemBuilder: (context, index){
         return new Column(
           children: <Widget>[
@@ -293,9 +306,9 @@ class _StateHome extends State<Home>{
             new Text(listperson[index].keterangan),
           ]
         );
-      }, separatorBuilder: (context, index){
-        return Divider();
-      }, itemCount: listperson.length),
+        }, separatorBuilder: (context, index){
+          return Divider();
+        }, itemCount: listperson.length),
     );
   }
 
