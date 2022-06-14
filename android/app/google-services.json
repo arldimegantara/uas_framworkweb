@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "9682332653",
+    "project_id": "fir-android-1cfc2",
+    "storage_bucket": "fir-android-1cfc2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:9682332653:android:4199d43942a46876fd15e4",
+        "android_client_info": {
+          "package_name": "com.example.rajinbaca"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "9682332653-grv50t00fq35g8se35mkog6aqrels9f3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4FkncDXEmlDWbFnqT1VIRthOM68Ko4Qg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "9682332653-grv50t00fq35g8se35mkog6aqrels9f3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
